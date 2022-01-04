@@ -1,0 +1,7 @@
+name: Skreet
+main: com.levelmc.skreet.Skreet
+version: ${project.version}
+description: Skreet Gameplay Mechanics
+author: Islati
+api-version: 1.15
+depend: [LevelCore,NametagEdit]

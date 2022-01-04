@@ -1,0 +1,8 @@
+name: LevelCore
+main: com.levelmc.core.LevelCore
+version: ${project.version}
+description: Core for Skreet
+author: Islati
+api-version: 1.15
+depend: [PlaceholderAPI]
+softdepend: [DamageIndicator, Vault]

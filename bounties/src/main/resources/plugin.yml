@@ -1,0 +1,8 @@
+name: Bounties
+main: com.levelmc.bounties.Bounties
+version: ${project.version}
+description: Bounties Bby
+author: Islati
+api-version: 0.01
+depend: [PlaceholderAPI]
+softdepend: [DamageIndicator, Vault]

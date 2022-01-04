@@ -1,0 +1,8 @@
+name: Wizards
+main: com.levelmc.wizards.Wizards
+version: ${project.version}
+description: Wizardry
+author: Brandon
+api-version: 1.15
+depend: [LevelCore, Loot]
+softdepend: [DamageIndicator]

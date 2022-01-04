@@ -1,0 +1,61 @@
+package com.levelmc.core.api.item;
+
+import com.google.common.collect.Sets;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import static org.bukkit.Material.*;
+
+
+public enum WeaponType {
+    SWORD(NETHERITE_SWORD,DIAMOND_SWORD, GOLDEN_SWORD, IRON_SWORD, STONE_SWORD, WOODEN_SWORD),
+    AXE(NETHERITE_AXE,DIAMOND_AXE, GOLDEN_AXE, IRON_AXE, STONE_AXE, WOODEN_AXE),
+    BOW(Material.BOW);
+
+    private static final Map<Material, WeaponType> weaponTypes = new HashMap<>();
+
+    static {
+        for (WeaponType weaponType : EnumSet.allOf(WeaponType.class)) {
+            for (Material material : weaponType.getMaterials()) {
+                weaponTypes.put(material, weaponType);
+            }
+        }
+    }
+
+    private Set<Material> materials;
+
+    WeaponType(Material... materials) {
+        this.materials = Sets.newHashSet(materials);
+    }
+
+    public Set<Material> getMaterials() {
+        return materials;
+    }
+
+    public boolean isSameType(ItemStack itemStack) {
+        return materials.contains(itemStack.getType());
+    }
+
+    public static boolean isItemWeapon(ItemStack itemStack, WeaponType weaponType) {
+        Material material = itemStack.getType();
+        if (!weaponTypes.containsKey(material)) {
+            return false;
+        }
+
+        WeaponType type = weaponTypes.get(material);
+        return type == weaponType;
+    }
+
+    public static boolean isMaterialWeapon(Material material) {
+        return weaponTypes.containsKey(material);
+    }
+
+    public static boolean isItemWeapon(ItemStack itemStack) {
+        return isMaterialWeapon(itemStack.getType());
+    }
+}

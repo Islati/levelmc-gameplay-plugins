@@ -1,0 +1,7 @@
+# Project exclude paths
+/core/target/
+/survival/target/
+**/target/**
+**/logs/**
+**/.idea
+.idea

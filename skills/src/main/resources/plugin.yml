@@ -1,0 +1,8 @@
+name: Skills
+main: com.levelmc.skills.Skills
+version: ${project.version}
+description: Skills Plugin
+author: Islati
+api-version: 0.01
+depend: [LevelCore]
+softdepend: [DamageIndicator]

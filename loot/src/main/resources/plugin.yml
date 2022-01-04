@@ -1,0 +1,8 @@
+name: Loot
+main: com.levelmc.loot.Loot
+version: ${project.version}
+description: Loot API Plugin
+author: Brandon
+api-version: 1.15
+depend: [LevelCore]
+softdepend: [DamageIndicator]
