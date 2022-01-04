@@ -5,3 +5,6 @@
 **/logs/**
 **/.idea
 .idea
+**/target
+**/*.class
+**/*.iml
