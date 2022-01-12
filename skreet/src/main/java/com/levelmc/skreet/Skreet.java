@@ -7,7 +7,6 @@ import com.levelmc.core.cmd.CommandHandler;
 import com.levelmc.skreet.commands.GangCommands;
 import com.levelmc.skreet.gangs.GangManager;
 import com.levelmc.skreet.listener.GangRelatedListener;
-import com.levelmc.skreet.listener.PlayerConnectionListener;
 import com.levelmc.skreet.listener.PvpListener;
 import com.levelmc.skreet.tags.TagManager;
 import com.levelmc.skreet.users.SkreetPlayers;
@@ -35,9 +34,6 @@ public class Skreet extends JavaPlugin {
 
     @Getter
     private GangRelatedListener gangListener = null;
-
-    @Getter
-    private PlayerConnectionListener playerConnectionListener = null;
 
     @Getter
     private PvpListener pvpListener = null;
@@ -69,6 +65,9 @@ public class Skreet extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
+
+        saveConfig();
+        getLogger().info("Saved tags.yml, and gangs.yml");
     }
 
     @Override
@@ -109,7 +108,29 @@ public class Skreet extends JavaPlugin {
         File tagsFile = new File(getDataFolder(), "tags.yml");
         File gangsFile = new File(getDataFolder(), "gangs.yml");
 
+        File usersFolder = new File(getDataFolder(),"users/");
+        if (!usersFolder.exists()) {
+            usersFolder.mkdirs();
+        }
+
         tagManager.init(tagsFile);
         gangManager.init(gangsFile);
+    }
+
+    public void saveConfig() {
+        File tagsFile = new File(getDataFolder(), "tags.yml");
+        File gangsFile = new File(getDataFolder(), "gangs.yml");
+
+        try {
+            tagManager.save(tagsFile);
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            gangManager.save(gangsFile);
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 }

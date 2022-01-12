@@ -7,6 +7,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+import org.joor.Reflect;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -67,6 +68,10 @@ public class PluginUtils {
         } catch (URISyntaxException e) {
             return null;
         }
+    }
+
+    public static boolean isServerMock() {
+        return Reflect.on(Bukkit.getServer()).get().getClass().getSimpleName().equalsIgnoreCase("ServerMock");
     }
 
     public static void registerListeners(Plugin plugin, Listener... listeners) {

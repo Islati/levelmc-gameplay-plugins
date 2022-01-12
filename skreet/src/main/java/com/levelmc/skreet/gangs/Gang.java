@@ -25,6 +25,7 @@ public class Gang extends YamlConfig {
     private GangType type;
 
     @Path("members")
+    @Getter
     private Map<UUID, String> membersMap = new HashMap<>();
 
     @Path("kills")
@@ -61,15 +62,19 @@ public class Gang extends YamlConfig {
             return false;
         }
 
+
+        membersMap.put(player.getId(), player.getName());
+        player.setGang(getType());
+
         var playerJoinGangEvent = new PlayerJoinGangEvent(player.getPlayer(), getType());
         PluginUtils.callEvent(playerJoinGangEvent);
 
         if (playerJoinGangEvent.isCancelled()) {
+            membersMap.remove(player.getId());
+            player.setGang(null);
             return false;
         }
 
-        membersMap.put(player.getId(), player.getName());
-        player.setGang(getType());
         return true;
     }
 
@@ -89,6 +94,7 @@ public class Gang extends YamlConfig {
         return getType().getDisplayName();
     }
 
+
     public void addKill(SkreetPlayer killer, SkreetPlayer killed, String reason) {
         gangKills.add(new GangKill(killer.getName(), killer.getId(), killed.getName(), killed.getId(), reason, killer.getGangType().toString()));
     }
@@ -96,7 +102,7 @@ public class Gang extends YamlConfig {
     public Set<Player> getOnlinePlayers() {
         Set<Player> players = new HashSet<>();
 
-        for(SkreetPlayer pl : SkreetPlayers.getInstance().getUsers().values()) {
+        for (SkreetPlayer pl : SkreetPlayers.getInstance().getUsers().values()) {
             if (pl.getGangType() == getType()) {
                 players.add(pl.getPlayer());
             }

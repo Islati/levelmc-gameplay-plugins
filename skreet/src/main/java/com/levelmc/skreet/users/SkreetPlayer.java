@@ -7,6 +7,7 @@ import com.levelmc.skreet.gangs.Gang;
 import com.levelmc.skreet.gangs.GangType;
 import com.levelmc.skreet.tags.TagManager;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -21,6 +22,11 @@ public class SkreetPlayer extends User {
     @Path("unlocked-tags")
     @Getter
     private List<String> unlockedTags = new ArrayList<>();
+
+    @Path("reputation")
+    @Getter
+    @Setter
+    private int reputation = 0;
 
 
     public SkreetPlayer(Player player) {

@@ -3,6 +3,11 @@ package com.levelmc.skreet.users;
 import com.levelmc.core.api.players.UserManager;
 import com.levelmc.core.api.yml.InvalidConfigurationException;
 import com.levelmc.skreet.Skreet;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
 import java.util.UUID;
@@ -57,5 +62,23 @@ public class SkreetPlayers extends UserManager<SkreetPlayer> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        addUser(new SkreetPlayer(e.getPlayer()));
+    }
+
+    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        removeUser(e.getPlayer().getUniqueId());
+    }
+
+    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerKick(PlayerKickEvent e) {
+        removeUser(e.getPlayer().getUniqueId());
     }
 }

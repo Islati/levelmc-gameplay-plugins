@@ -32,14 +32,15 @@ public class GangSelectionMenu extends ItemMenu {
         @Override
         public void onClick(MenuItem item, Player player, ClickType type) {
             SkreetPlayer user = SkreetPlayers.getInstance().getUser(player);
+            Gang gang = Skreet.getInstance().getGangManager().getGang(this.type);
+
             if (user.hasGang()) {
-                item.getMenu().closeMenu(player);
                 Chat.message(player, "&cYou already have a gang chosen.");
                 return;
+            } else if (!gang.addMember(user)) {
+                Chat.message(player, "&cUnable to join gang");
+                return;
             }
-
-            Gang gang = Skreet.getInstance().getGangManager().getGang(this.type);
-            gang.addMember(user);
             item.getMenu().closeMenu(player);
         }
     }
@@ -66,15 +67,13 @@ public class GangSelectionMenu extends ItemMenu {
             public void doAction(Menu menu, Player player) {
                 SkreetPlayer user = SkreetPlayers.getInstance().getUser(player);
 
-                if (!user.hasGang()) {
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            GangSelectionMenu.getInstance().openMenu(player);
-                        }
-                    }.runTaskLater(Skreet.getInstance(),5L);
+                if (user == null) {
+                    return;
                 }
-                Chat.message(player,"&eYou must choose a gang.");
+
+                if (!user.hasGang()) {
+                    Menus.switchMenu(player, menu, GangSelectionMenu.getInstance());
+                }
             }
         });
     }

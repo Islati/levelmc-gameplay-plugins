@@ -27,7 +27,6 @@ public class GangRelatedListener implements Listener {
     public void onPlayerTryQuitGang(PlayerTryQuitGangEvent event) {
         SkreetPlayer player = event.getGamePlayer();
         Chat.broadcast(String.format("&e&l%s&r&7 tried to betray the &r&l%s", player.getName(), player.getGang().getDisplayName()));
-
     }
 
     @EventHandler
@@ -36,6 +35,7 @@ public class GangRelatedListener implements Listener {
         Player player = event.getPlayer();
 
         final SkreetPlayer user = event.getGamePlayer();
+        Chat.broadcast(String.format("%s%s has joined the %s", gang.getType().getColorPrefix(), user.getName(), gang.getDisplayName()));
 
         /*
         If the player tries to join a gang that isn't theirs.
@@ -49,11 +49,9 @@ public class GangRelatedListener implements Listener {
         }
 
         Set<Player> onlineGangMembers = gang.getOnlinePlayers();
+        onlineGangMembers.add(player);
         for (Player p : onlineGangMembers) {
             Chat.sendTitle(player, gang.getDisplayName(), String.format("&7%s joined the gang", p.getName()), 10, 15, 15);
         }
-
-
-//        NametagEdit.getApi().setPrefix(player, String.format("%s&r ", gang.getDisplayName()));
     }
 }

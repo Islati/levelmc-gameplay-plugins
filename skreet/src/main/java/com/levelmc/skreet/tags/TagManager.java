@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class TagManager extends YamlConfig {
 
-    @Path("available-tags")
+    @Path("tags")
     @Getter
     private Map<String, Tag> tags = new HashMap<>();
 

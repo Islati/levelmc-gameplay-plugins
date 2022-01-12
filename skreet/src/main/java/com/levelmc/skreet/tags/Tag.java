@@ -8,7 +8,7 @@ import lombok.Setter;
 public class Tag extends YamlConfig {
     @Path("name")
     @Getter
-    private final String name;
+    private String name;
 
     @Path("tag")
     @Getter
@@ -19,4 +19,6 @@ public class Tag extends YamlConfig {
         this.name = name;
         this.tag = tag;
     }
+
+    public Tag() {}
 }
