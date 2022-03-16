@@ -15,6 +15,11 @@ import org.bukkit.event.Listener;
 
 import java.util.Set;
 
+/***
+ * Handles all the gang related events.
+ *
+ * Quitting, Joining, etc.
+ */
 public class GangRelatedListener implements Listener {
 
     private Skreet parent;

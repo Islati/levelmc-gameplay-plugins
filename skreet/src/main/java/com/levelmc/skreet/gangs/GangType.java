@@ -3,8 +3,11 @@ package com.levelmc.skreet.gangs;
 import lombok.Getter;
 
 public enum GangType {
-    CRIPS("Crips", "&bCrips","&b"),
-    BLOODS("Bloods", "&cBloods","&c");
+    CRIPS("Crips", "&bCrips", "&b"),
+    BLOODS("Bloods", "&cBloods", "&c"),
+    BACCAS("Baccas", "&0Baccas", "&0"),
+    ANGELS("Angels", "&6Angel", "&6"),
+    PAGANS("Pagans", "&aPagan", "&a");
 
     private String name;
 
@@ -14,7 +17,7 @@ public enum GangType {
     @Getter
     private String colorPrefix;
 
-    GangType(String name, String displayName,String colorPrefix) {
+    GangType(String name, String displayName, String colorPrefix) {
         this.name = name;
         this.displayName = displayName;
         this.colorPrefix = colorPrefix;
@@ -35,6 +38,12 @@ public enum GangType {
                 return GangType.CRIPS;
             case "bloods":
                 return GangType.BLOODS;
+            case "baccas":
+                return GangType.BACCAS;
+            case "angels":
+                return GangType.ANGELS;
+            case "pagans":
+                return GangType.PAGANS;
             default:
                 return null;
         }

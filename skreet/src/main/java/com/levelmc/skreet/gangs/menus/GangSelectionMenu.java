@@ -58,8 +58,11 @@ public class GangSelectionMenu extends ItemMenu {
     protected GangSelectionMenu() {
         super("Choose your Gang", 1);
 
-        item(0, new MenuItem(ItemBuilder.of(Material.RED_DYE).name("&cBlood").lore("&7Click to become a Blood").item()).onClickHandler(new GangSelectionBehaviour(GangType.BLOODS)));
-        item(8, new MenuItem(ItemBuilder.of(Material.BLUE_DYE).name("&bCrip").lore("&7Click to become a Crip").item()).onClickHandler(new GangSelectionBehaviour(GangType.CRIPS)));
+        item(0, new MenuItem(ItemBuilder.of(Material.RED_DYE).name("&cBlood").lore("&7On Blood").item()).onClickHandler(new GangSelectionBehaviour(GangType.BLOODS)));
+        item(2, new MenuItem(ItemBuilder.of(Material.GREEN_DYE).name("&aPagan").lore("&7Pagan").item()).onClickHandler(new GangSelectionBehaviour(GangType.PAGANS)));
+        item(5, new MenuItem(ItemBuilder.of(Material.BLACK_DYE).name("&0Baccas").lore("&7Of Baccas").item()).onClickHandler(new GangSelectionBehaviour(GangType.BACCAS)));
+        item(7, new MenuItem(ItemBuilder.of(Material.ORANGE_DYE).name("&eAngel").lore("&eAngel").item()).onClickHandler(new GangSelectionBehaviour(GangType.ANGELS)));
+        item(9, new MenuItem(ItemBuilder.of(Material.BLUE_DYE).name("&bCrip").lore("&7On Crip").item()).onClickHandler(new GangSelectionBehaviour(GangType.CRIPS)));
 
         exitOnClickOutside(false);
         onClose(new MenuBehaviour() {

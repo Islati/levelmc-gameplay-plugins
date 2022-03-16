@@ -3,6 +3,6 @@ main: com.levelmc.skills.Skills
 version: ${project.version}
 description: Skills Plugin
 author: Islati
-api-version: 0.01
+api-version: 1.15
 depend: [LevelCore]
 softdepend: [DamageIndicator]

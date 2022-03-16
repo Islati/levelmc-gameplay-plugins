@@ -44,7 +44,6 @@ public class EntityUtils {
         return entities;
     }
 
-
     /**
      * Spawn an entity at a specific location
      *

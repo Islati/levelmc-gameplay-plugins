@@ -12,6 +12,7 @@ import com.levelmc.skreet.tags.TagManager;
 import com.levelmc.skreet.users.SkreetPlayers;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -84,6 +85,9 @@ public class Skreet extends JavaPlugin {
         }
 
         initListeners();
+
+        Bukkit.clearRecipes();
+        getLogger().info("Recipes cleared... Game on");
 
     }
 

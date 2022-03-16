@@ -15,6 +15,7 @@ public class GangCommands {
 
     private HelpScreen helpMenu = new HelpScreen("Gang Commands")
             .addEntry("gang", "Base Command")
+            .addEntry("gang help","Open gang help menu")
             .addEntry("gang join", "Opens the gang join menu");
 
     public GangCommands() {
