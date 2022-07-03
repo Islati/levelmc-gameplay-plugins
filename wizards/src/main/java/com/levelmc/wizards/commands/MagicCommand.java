@@ -5,13 +5,14 @@ import com.levelmc.core.cmd.Arg;
 import com.levelmc.core.cmd.Command;
 import com.levelmc.core.cmd.commands.CommandInfo;
 import com.levelmc.wizards.Wizards;
+import com.levelmc.wizards.gui.PlayerWizardGUI;
 import com.levelmc.wizards.gui.SpellBindsGUI;
 import org.bukkit.entity.Player;
 
 @CommandInfo(name = "magic",aliases = "m", description = "Commands to manage your magical spells")
 public class MagicCommand {
     private HelpScreen helpScreen = new HelpScreen("Magic Command Help")
-            .addEntry("magic","Open the overview enu.")
+            .addEntry("magic","Open the overview menu.")
             .addEntry("magic help [page]","This help screen")
             .addEntry("magic binds","Manage your wands spellbinds");
 
@@ -22,7 +23,7 @@ public class MagicCommand {
 
     @Command(identifier = "magic",description = "Magic Command")
     public void onMagicCommand(Player sender) {
-        helpScreen.sendTo(sender,1,8);
+        new PlayerWizardGUI(Wizards.getInstance().getUserManager().getUser(sender));
     }
 
     @Command(identifier = "magic help",description = "Help menu for the magic command",onlyPlayers = false)

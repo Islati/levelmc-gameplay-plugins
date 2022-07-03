@@ -69,6 +69,10 @@ public class Wizard extends User {
         return LevelExpUtil.getLevelAtExperience(experience);
     }
 
+    public int getNextLevelExperience() {
+        return LevelExpUtil.getExperienceAtLevel(getWizardingLevel() + 1);
+    }
+
     public void addExperience(int amount) {
         experience += amount;
     }
@@ -227,7 +231,7 @@ public class Wizard extends User {
 
         int maxMana = this.maxMana;
 
-        for(ItemStack item : armor) {
+        for (ItemStack item : armor) {
             if (item == null || item.getType() == Material.AIR) {
                 continue;
             }
@@ -247,7 +251,7 @@ public class Wizard extends User {
 
         int regenAmount = 5;
 
-        for(ItemStack item : armor) {
+        for (ItemStack item : armor) {
             if (item == null || item.getType() == Material.AIR) {
                 continue;
             }

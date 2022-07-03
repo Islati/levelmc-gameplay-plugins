@@ -249,4 +249,6 @@ public class LootTable extends YamlConfig {
 
         return baseItem;
     }
+
+
 }

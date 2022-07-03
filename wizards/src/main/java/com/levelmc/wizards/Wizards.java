@@ -1,6 +1,7 @@
 package com.levelmc.wizards;
 
 import com.levelmc.core.api.utils.PluginUtils;
+import com.levelmc.core.api.yml.InvalidConfigurationException;
 import com.levelmc.core.cmd.CommandHandler;
 import com.levelmc.loot.Loot;
 import com.levelmc.loot.api.ChancedMaterial;
@@ -10,6 +11,7 @@ import com.levelmc.loot.api.abilities.AbilityProperties;
 import com.levelmc.wizards.abilities.MagicWandAbility;
 import com.levelmc.wizards.commands.MagicCommand;
 import com.levelmc.wizards.commands.WizAdminCommand;
+import com.levelmc.wizards.config.MenuConfig;
 import com.levelmc.wizards.spells.*;
 import com.levelmc.wizards.users.WizardsUserManager;
 import com.levelmc.wizards.listeners.WizardingListener;
@@ -43,6 +45,9 @@ public class Wizards extends JavaPlugin {
     private CommandHandler commandHandler;
 
     @Getter
+    private MenuConfig menuConfig = new MenuConfig();
+
+    @Getter
     private SpellManager spellManager;
 
     private WizardingListener listener = null;
@@ -74,6 +79,17 @@ public class Wizards extends JavaPlugin {
         instance = this;
     }
 
+    /**
+     * Initialize the configuration files for this plugin.
+     */
+    public void initConfig() {
+        try {
+            menuConfig.init(new File(getDataFolder(),"menu-config.yml"));
+        } catch (InvalidConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void onEnable() {
         instance = this;
@@ -92,6 +108,8 @@ public class Wizards extends JavaPlugin {
         Creates the wands drop table and registers it with the LootRegistry (API)
          */
         initDropTable();
+
+        //todo implement javascript engine with context to create spells
 
         spellManager.registerSpells(
                 new SpellFlameCircle(),
@@ -116,16 +134,6 @@ public class Wizards extends JavaPlugin {
     }
 
     private void initDropTable() {
-        wandsDropTable.addChancedMaterials(new ChancedMaterial(Material.STICK, 100, 100));
-        wandsDropTable.addChancedMaterials(new ChancedMaterial(Material.BLAZE_ROD, 20, 100));
-
-        wandsDropTable.add(Name.prefix("&dEnchantress'", 20, 100))
-                .add(Name.prefix("&eJesters", 20, 100))
-                .add(Name.prefix("&bFairy's", 20, 100))
-                .add(Name.prefix("&aElven", 20, 100))
-                .add(Name.prefix("&cChaotic", 5, 100))
-                .add(Name.prefix("", 100, 100))
-                .add(Name.base("Wand", 100, 100, MagicWandAbility.getInstance(), new AbilityProperties()));
 
         Loot.getInstance().getRegistry().addDropTable(wandsDropTable);
     }

@@ -40,4 +40,20 @@ public class ProgressBarUtil {
 
         return builder.toString();
     }
+
+    public static String renderProgressBar(int currentExp) {
+        int currentLevel = LevelExpUtil.getLevelAtExperience(currentExp);
+        int nextLevelExp = LevelExpUtil.getExperienceAtLevel(currentLevel + 1);
+
+        int remainingExp = nextLevelExp - currentExp; //if 83 and 50 remaining is 23
+        int currentLevelExp = LevelExpUtil.getExperienceAtLevel(currentLevel); //xp to reach current lvl
+
+        int nextLevelExpGap = nextLevelExp - currentLevelExp; //difference in exp between two levels.
+
+        int expTowardsLevel = nextLevelExp - remainingExp;
+
+        double expPercentLeft = ((double) expTowardsLevel / (double) nextLevelExpGap) * 100;
+        int numericPercentLeft = (int) NumberUtil.round(expPercentLeft, 1);
+        return ProgressBarUtil.renderProgressBar("&a", "&c", ProgressBarUtil.DEFAULT_BAR, numericPercentLeft);
+    }
 }

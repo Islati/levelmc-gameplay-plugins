@@ -2,6 +2,7 @@ package com.levelmc.loot.api;
 
 import com.levelmc.core.api.Chanceable;
 import com.levelmc.core.api.yml.Path;
+import com.levelmc.loot.Loot;
 
 /**
  * Adds a chance and measure to a LootTable.
@@ -33,5 +34,9 @@ public class DropTable extends LootTable implements Chanceable {
     @Override
     public int getMeasure() {
         return measure;
+    }
+
+    public void register() {
+        Loot.getInstance().getRegistry().addDropTable(this);
     }
 }

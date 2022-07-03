@@ -177,7 +177,7 @@ public class WizardingListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent e) {
+    public void onPlayerInteractHandleWizardItems(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         Action action = e.getAction();
 
